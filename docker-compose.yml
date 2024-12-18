@@ -1,0 +1,23 @@
+services:
+  app:
+    image: laravel-php:latest
+    container_name: laravel_app
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/var/www/html
+    networks:
+      - laravel
+
+  mailhog:
+    image: mailhog/mailhog
+    container_name: mailhog
+    ports:
+      - "1025:1025"
+      - "8025:8025"  # Untuk akses web interface Mailhog
+    networks:
+      - laravel
+
+networks:
+  laravel:
+    driver: bridge
